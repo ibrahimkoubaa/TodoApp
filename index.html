@@ -4,6 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;600&display=swap" rel="stylesheet">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TodoApp</title>
@@ -11,22 +14,36 @@
 
 <body>
     <main>
-        <div>
-            <span>
-                <span>todo<span>app</span></span>
-            </span>
-        </div>
-        <div>
-            <div>
-                <h1>never miss an important task again</h1>
-                <p>TodoApp is a productivity app designed to help people stay organized and get more done.</p>
-                <di>
-                    <button>
-                        Download
-                    </button>
-                </di>
+        <div class="left-side">
+            <div class="logo">
+                <span class="slim">todo<span class="bold">App</span></span>
             </div>
-            <div></div>
+            <div class="content">
+                <h1 class="main-title">Never miss an important task again!</h1>
+                <p class="main-text">TodoApp is a productivity app designed to help people stay organized and get more done.</p>
+                <div>
+                    <button class="cta-download">
+                            <span>Download</span>
+                            <div class="icon-arrow"></div>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="right-side">
+            <div class="header-app">
+                <input class="search" type="search">
+                <span id="date">6463-2614+</span>
+                <div class="">
+                    <input class="add-cart" type="text">
+                    <button class="cte-submit">submit</button>
+                </div>
+            </div>
+            <div class="carts">
+                <div class="cart">
+                    <input id="check" type="checkbox">
+                    <label for="check">Arrange a weekly meet.</label>
+                </div>
+            </div>
         </div>
     </main>
     <script src="./js/app.js"></script>
