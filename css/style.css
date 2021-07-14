@@ -15,14 +15,16 @@ main {
     background-size: cover;
     display: flex;
     flex-direction: row;
-    gap: 127px;
+    gap: 82px;
     padding: 52px 199px 99px 70px;
 }
 
 .right-side {
-    width: 375px;
+    margin-top: 38px;
     height: 667px;
-    padding-top: 38px;
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.14);
+    background-color: #FFFFFF;
+    flex: 1;
 }
 
 .left-side {
@@ -31,6 +33,7 @@ main {
     font-style: normal;
     font-size: 32px;
     line-height: 39px;
+    flex: 2;
 }
 
 .logo {
@@ -70,34 +73,162 @@ main {
     display: flex;
     gap: 18px;
     align-items: center;
+    position: relative;
+    font-size: 20px;
+    font-weight: 600;
+    font-style: normal;
+    cursor: pointer;
 }
 
 .icon-arrow {
-    width: 28px;
+    width: 36px;
     height: 3px;
     background-color: #7556CD;
+    border-radius: 4px;
 }
 
 .icon-arrow::after {
     content: "";
     display: inline-block;
-    width: 8px;
+    width: 10px;
     height: 3px;
     background-color: #7556CD;
-    transform: rotate( 45deg);
+    transform: rotate( 135deg);
     position: absolute;
-    bottom: 2px;
-    left: 20px;
+    bottom: 18px;
+    right: 30px;
+    border-radius: 4px;
 }
 
 .icon-arrow::before {
     content: "";
     display: inline-block;
-    width: 8px;
+    width: 10px;
     height: 3px;
     background-color: #7556CD;
-    transform: rotate( 135deg);
+    transform: rotate( 45deg);
     position: absolute;
-    top: 2px;
-    left: 20px;
+    top: 18px;
+    right: 30px;
+    border-radius: 4px;
+}
+
+.header-app {
+    background: url(../images/background-app.png);
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    padding: 19px 24px 48px;
+    background-size: cover;
+}
+
+.search {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.276) 100%);
+    border-radius: 8px;
+    border: none;
+    padding: 10px 20px 10px 43px;
+    position: relative;
+    font-size: 20px;
+    font-weight: 600;
+    font-style: normal;
+}
+
+::placeholder {
+    color: #FFFFFF;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 17px;
+    line-height: 21px;
+    font-family: Quicksand;
+}
+
+.icon-search {
+    width: 17px;
+    height: 17px;
+    border-radius: 100%;
+    position: relative;
+    border: solid 2px #FFFFFF;
+    bottom: 31px;
+    left: 14px;
+}
+
+.icon-search::before {
+    content: "";
+    width: 10px;
+    height: 2px;
+    background-color: #FFFFFF;
+    border-radius: 3px;
+    position: absolute;
+    transform: rotate( 45deg);
+    left: 11px;
+    top: 15px;
+}
+
+.add-cart {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.276) 100%);
+    border-radius: 8px;
+    border: none;
+    padding: 5px 18px;
+    position: relative;
+    font-size: 20px;
+    font-weight: 600;
+    font-style: normal;
+    max-width: 222px;
+}
+
+.group-cart {
+    display: flex;
+    gap: 25px;
+    margin-top: 18px;
+}
+
+.cte-submit {
+    color: #7556CD;
+    box-shadow: 4px 4px 14px rgb(228 113 142 / 40%);
+    border-radius: 8px;
+    border: none;
+    font-size: 17px;
+    font-weight: 600;
+    font-style: normal;
+    cursor: pointer;
+    padding: 8px;
+}
+
+#date {
+    color: #FFFFFF;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 22px;
+    line-height: 27px;
+    font-family: Quicksand;
+}
+
+.carts {
+    padding: 0 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 17px;
+}
+
+.cart {
+    background: #FFFFFF;
+    box-shadow: 0px 4px 14px rgb(119 187 238 / 25%);
+    border-radius: 8px;
+    border-left: solid 6px #5551FF;
+    padding: 20px;
+    display: flex;
+    bottom: 20px;
+    gap: 10px;
+    position: relative;
+    align-items: center;
+}
+
+#check {
+    display: none;
+}
+
+.checkboxclass {
+    border-radius: 50%;
+    width: 8px;
+    height: 8px;
+    border: solid 1px #000000;
 }
