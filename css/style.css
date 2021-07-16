@@ -8,6 +8,7 @@
 body {
     margin: 0px auto;
     max-width: 1440px;
+    max-height: max-content;
 }
 
 main {
@@ -16,14 +17,12 @@ main {
     display: flex;
     flex-direction: row;
     gap: 82px;
+    height: 900px;
     padding: 52px 199px 99px 70px;
 }
 
 .right-side {
     margin-top: 38px;
-    height: 667px;
-    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.14);
-    background-color: #FFFFFF;
     flex: 1;
 }
 
@@ -125,7 +124,7 @@ main {
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.276) 100%);
     border-radius: 8px;
     border: none;
-    padding: 10px 20px 10px 43px;
+    padding: 10px 0px 10px 37px;
     position: relative;
     font-size: 20px;
     font-weight: 600;
@@ -136,7 +135,7 @@ main {
     color: #FFFFFF;
     font-weight: 600;
     font-style: normal;
-    font-size: 17px;
+    font-size: 20px;
     line-height: 21px;
     font-family: Quicksand;
 }
@@ -147,8 +146,8 @@ main {
     border-radius: 100%;
     position: relative;
     border: solid 2px #FFFFFF;
-    bottom: 31px;
-    left: 14px;
+    bottom: 32px;
+    left: 11px;
 }
 
 .icon-search::before {
@@ -167,21 +166,20 @@ main {
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.276) 100%);
     border-radius: 8px;
     border: none;
-    padding: 5px 18px;
+    padding: 10px 18px;
     position: relative;
     font-size: 20px;
     font-weight: 600;
     font-style: normal;
-    max-width: 222px;
 }
 
 .group-cart {
     display: flex;
-    gap: 25px;
+    gap: 11px;
     margin-top: 18px;
 }
 
-.cte-submit {
+#cta-submit {
     color: #7556CD;
     box-shadow: 4px 4px 14px rgb(228 113 142 / 40%);
     border-radius: 8px;
@@ -191,6 +189,16 @@ main {
     font-style: normal;
     cursor: pointer;
     padding: 8px;
+    display: none;
+    background: linear-gradient( 180deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.276) 100%);
+}
+
+.textnote {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 19px;
+    color: #3A3A3A;
 }
 
 #date {
@@ -209,6 +217,10 @@ main {
     gap: 17px;
 }
 
+.fitHeight {
+    height: fit-content;
+}
+
 .cart {
     background: #FFFFFF;
     box-shadow: 0px 4px 14px rgb(119 187 238 / 25%);
@@ -218,17 +230,5 @@ main {
     display: flex;
     bottom: 20px;
     gap: 10px;
-    position: relative;
     align-items: center;
-}
-
-#check {
-    display: none;
-}
-
-.checkboxclass {
-    border-radius: 50%;
-    width: 8px;
-    height: 8px;
-    border: solid 1px #000000;
 }
