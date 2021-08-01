@@ -1,96 +1,110 @@
+// call search bar
+let searchBar = document.querySelector('.search');
+// call input of adding note
 let noteInput = document.querySelector('.add-cart');
+// call button of submitting a note
 let btnSubmit = document.getElementById('cta-submit');
+// call 
+let blocSubmit = document.querySelector('.right-side');
+// call text content of note added
+let span = document.querySelector('.text');
 
 
+// adding an updating date
+let dateUpdated = document.getElementById("date");
+const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+var today = new Date();
+var dd = String(today.getDate());
+var mm = String(months[today.getMonth()]);
+var yyyy = today.getFullYear();
+today = dd + 'th ' + mm + ', ' + yyyy;
+dateUpdated.innerHTML = today;
 
-let searchBarre = document.querySelector('.search');
-let spans = document.querySelectorAll('.textnote');
-let list = document.querySelector('.carts');
-
-
-
-
-searchBarre.addEventListener('keyup', function(e) {
-    let contentSearch = e.target.value.toLowerCase();
-    let divOfDiv = list.querySelectorAll('li');
-
-    Array.from(divOfDiv).forEach(function(div) {
-        let tiile = div.lastElementChild.textContent;
-        if (tiile.toLowerCase().indexOf(contentSearch) != -1) {
-            div.style.display = 'block';
-        } else {
-            div.style.display = 'none';
-        }
-    });
-});
-let background = document.querySelector('.right-side')
-let listBig = document.querySelector('.carts')
-
-
+// function to indisplay submitting button
 noteInput.onclick = function() {
     if (noteInput.value == "") {
         btnSubmit.style.display = 'block';
         noteInput.style.width = '207px';
     }
-}
+};
 
 
+//create a ul tag within a div
+let blocAdded = document.createElement('div');
+blocAdded.className = 'portionAdded';
+blocAdded.innerHTML = '<ul id="carts"></ul>';
+blocSubmit.append(blocAdded);
+
+// call the unorder list
+let list = blocAdded.querySelector('#carts');
+
+// function for adding a new item
 btnSubmit.addEventListener("click", function(e) {
     if (noteInput.value !== "") {
-
         e.preventDefault;
-
-        let div = document.createElement('li');
-        div.className = 'cart';
-        div.innerHTML = '<input id="check" type="radio">';
-        let textNote = document.createElement('span');
+        let newItem = document.createElement('li');
+        newItem.className = 'cart';
+        newItem.id = Date.now();
+        newItem.innerHTML = '<input id="check" type="radio">';
+        var textNote = document.createElement('span');
         textNote.className = 'textnote'
         textNote.textContent = noteInput.value;
-        div.append(textNote);
-        background.style.cssText += 'background-color:#FFFFFF;box-shadow:0px 4px 14px rgba(0, 0, 0, 0.14)';
-        listBig.style.cssText += 'height: 500px;overflow: auto';
+        newItem.append(textNote);
+        list.style.cssText += 'padding-bottom: 10px;background-color:#FFFFFF;box-shadow:0px 4px 14px rgba(0, 0, 0, 0.14)';
+        list.append(newItem);
+        // set local storage
+        localStorage.setItem('textInput', span.textContent);
 
-        list.append(div);
     }
-
-
-
     noteInput.value = "";
-
-
-    let removeNote = document.querySelectorAll('.cart');
-    let radio = document.getElementById('check');
-    let arrayjs = Array.from(removeNote)
-
-    for (let i = 0; i < arrayjs.length; i++) {
-        radio.addEventListener('click', () => {
-            function myFunction() {
-                var txt;
-                if (confirm("Press a button!")) {
-                    txt = "You pressed OK!";
-                } else {
-                    txt = "You pressed Cancel!";
-                }
-                document.getElementById("check").innerHTML = txt;
-            }
-            arrayjs[i].remove()
-            background.style.cssText += 'background-color:transparent;box-shadow:none';
-            listBig.style.cssText += 'height: 0;overflow: none';
-
-            btnSubmit.style.display = 'none';
-            noteInput.style.width = 'auto';
-
-        })
-    }
 });
 
-const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+//get local storage
+let stordNote = localStorage.getItem('textInput')
+if (noteInput) {
+    let newItem = document.createElement('li');
+    newItem.className = 'cart';
+    newItem.innerHTML = '<input id="check" type="radio">';
+    var textNote = document.createElement('span');
+    textNote.className = 'textnote'
+    newItem.append(textNote);
+    list.style.cssText += 'padding-bottom: 10px;background-color:#FFFFFF;box-shadow:0px 4px 14px rgba(0, 0, 0, 0.14)';
+    list.append(newItem);
 
-var today = new Date();
-var dd = String(today.getDate()).padStart(2, '0');
-var mm = String(months[today.getMonth()]);
-var yyyy = today.getFullYear();
+    textNote.textContent = stordNote;
+}
 
-today = dd + 'th ' + mm + ', ' + yyyy;
-let dateUpdated = document.getElementById("date");
-dateUpdated.innerHTML = today;
+noteInput.addEventListener('input', word => {
+    span.style.display = 'none'
+    span.textContent = word.target.value;
+
+})
+
+// function searching for a note
+searchBar.addEventListener('keyup', function(e) {
+    let contentSearch = e.target.value.toLowerCase();
+    let itemsInList = list.querySelectorAll('li');
+    // change list of dom to an array to  apply forEach methode 
+    Array.from(itemsInList).forEach(function(item) {
+        let textNote = item.textContent.toLowerCase();
+        if (textNote.indexOf(contentSearch) == -1) {
+            item.style.display = 'none';
+            alert('Not find it')
+        } else {
+            item.style.display = 'flex';
+        }
+    });
+});
+
+
+//removing note with confirmation
+list.addEventListener('click', function(e) {
+    let itemToRemove = e.target.closest('#check');
+    let message = confirm("Do you want to remove it !!");
+    if (message == true) {
+        itemToRemove.parentNode.remove();
+        list.style.cssText += 'padding-bottom:0px';
+        localStorage.removeItem('textInput');
+
+    }
+});

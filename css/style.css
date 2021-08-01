@@ -84,6 +84,7 @@ main {
     height: 3px;
     background-color: #7556CD;
     border-radius: 4px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .icon-arrow::after {
@@ -97,6 +98,7 @@ main {
     bottom: 18px;
     right: 30px;
     border-radius: 4px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .icon-arrow::before {
@@ -118,6 +120,13 @@ main {
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     padding: 19px 24px 48px;
     background-size: cover;
+    position: relative;
+}
+
+#check {
+    width: 19px;
+    height: 19px;
+    cursor: pointer;
 }
 
 .search {
@@ -126,9 +135,11 @@ main {
     border: none;
     padding: 10px 0px 10px 37px;
     position: relative;
-    font-size: 20px;
+    font-size: 17px;
     font-weight: 600;
+    line-height: 22px;
     font-style: normal;
+    width: 100%;
 }
 
 ::placeholder {
@@ -141,12 +152,12 @@ main {
 }
 
 .icon-search {
-    width: 17px;
-    height: 17px;
+    width: 14px;
+    height: 14px;
     border-radius: 100%;
     position: relative;
     border: solid 2px #FFFFFF;
-    bottom: 32px;
+    bottom: 31px;
     left: 11px;
 }
 
@@ -158,8 +169,8 @@ main {
     border-radius: 3px;
     position: absolute;
     transform: rotate( 45deg);
-    left: 11px;
-    top: 15px;
+    left: 8px;
+    top: 12px;
 }
 
 .add-cart {
@@ -181,7 +192,6 @@ main {
 
 #cta-submit {
     color: #7556CD;
-    box-shadow: 4px 4px 14px rgb(228 113 142 / 40%);
     border-radius: 8px;
     border: none;
     font-size: 17px;
@@ -194,8 +204,9 @@ main {
 }
 
 .textnote {
+    font-family: 'Open Sans', sans-serif;
     font-style: normal;
-    font-weight: normal;
+    font-weight: 600;
     font-size: 14px;
     line-height: 19px;
     color: #3A3A3A;
@@ -210,15 +221,16 @@ main {
     font-family: Quicksand;
 }
 
-.carts {
+#carts {
     padding: 0 24px;
     display: flex;
     flex-direction: column;
     gap: 17px;
 }
 
-.fitHeight {
-    height: fit-content;
+.portionAdded {
+    height: 500px;
+    overflow: auto;
 }
 
 .cart {
@@ -226,9 +238,10 @@ main {
     box-shadow: 0px 4px 14px rgb(119 187 238 / 25%);
     border-radius: 8px;
     border-left: solid 6px #5551FF;
-    padding: 20px;
+    padding: 21px;
     display: flex;
     bottom: 20px;
-    gap: 10px;
+    gap: 13px;
     align-items: center;
+    width: 100%;
 }
