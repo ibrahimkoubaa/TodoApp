@@ -4,11 +4,9 @@ let searchBar = document.querySelector('.search');
 let noteInput = document.querySelector('.add-cart');
 // call button of submitting a note
 let btnSubmit = document.getElementById('cta-submit');
-// call 
-let blocSubmit = document.querySelector('.right-side');
-// call text content of note added
-let span = document.querySelector('.text');
-
+// call ul list 
+let list = document.querySelector('#carts');
+let inputRadio = document.querySelector('#check');
 
 // adding an updating date
 let dateUpdated = document.getElementById("date");
@@ -22,74 +20,50 @@ dateUpdated.innerHTML = today;
 
 // function to indisplay submitting button
 noteInput.onclick = function() {
-    if (noteInput.value == "") {
-        btnSubmit.style.display = 'block';
-        noteInput.style.width = '207px';
-    }
+    btnSubmit.disabled = false;
+    btnSubmit.style.cssText = 'cursor: pointer;color: #7556CD;background: linear-gradient( 180deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.276) 100%);'
+};
+
+function addContent() {
+    let newItem = document.createElement('li');
+    newItem.className = 'cart';
+
+    newItem.innerHTML = '<input id="Date.now()" type="radio">';
+    let textNote = document.createElement('span');
+    textNote.className = 'textnote';
+    textNote.id = Date.now();
+    newItem.append(textNote);
+    list.style.cssText += 'background-color:#FFFFFF;box-shadow:0px 4px 14px rgba(0, 0, 0, 0.14)';
+    list.prepend(newItem);
+    btnSubmit.disabled = true;
+    btnSubmit.style.cssText = 'none';
 };
 
 
-//create a ul tag within a div
-let blocAdded = document.createElement('div');
-blocAdded.className = 'portionAdded';
-blocAdded.innerHTML = '<ul id="carts"></ul>';
-blocSubmit.append(blocAdded);
-
-// call the unorder list
-let list = blocAdded.querySelector('#carts');
 
 // function for adding a new item
 btnSubmit.addEventListener("click", function(e) {
     if (noteInput.value !== "") {
-        e.preventDefault;
-        let newItem = document.createElement('li');
-        newItem.className = 'cart';
-        newItem.id = Date.now();
-        newItem.innerHTML = '<input id="check" type="radio">';
-        var textNote = document.createElement('span');
-        textNote.className = 'textnote'
-        textNote.textContent = noteInput.value;
-        newItem.append(textNote);
-        list.style.cssText += 'padding-bottom: 10px;background-color:#FFFFFF;box-shadow:0px 4px 14px rgba(0, 0, 0, 0.14)';
-        list.append(newItem);
-        // set local storage
-        localStorage.setItem('textInput', span.textContent);
-
+        addContent()
+        let span = document.querySelector('.textnote');
+        span.textContent = noteInput.value;
+        setToLocalS(noteInput.value);
     }
     noteInput.value = "";
 });
 
-//get local storage
-let stordNote = localStorage.getItem('textInput')
-if (noteInput) {
-    let newItem = document.createElement('li');
-    newItem.className = 'cart';
-    newItem.innerHTML = '<input id="check" type="radio">';
-    var textNote = document.createElement('span');
-    textNote.className = 'textnote'
-    newItem.append(textNote);
-    list.style.cssText += 'padding-bottom: 10px;background-color:#FFFFFF;box-shadow:0px 4px 14px rgba(0, 0, 0, 0.14)';
-    list.append(newItem);
 
-    textNote.textContent = stordNote;
-}
-
-noteInput.addEventListener('input', word => {
-    span.style.display = 'none'
-    span.textContent = word.target.value;
-
-})
 
 // function searching for a note
 searchBar.addEventListener('keyup', function(e) {
     let contentSearch = e.target.value.toLowerCase();
+    saveSearch(contentSearch)
     let itemsInList = list.querySelectorAll('li');
     // change list of dom to an array to  apply forEach methode 
     Array.from(itemsInList).forEach(function(item) {
         let textNote = item.textContent.toLowerCase();
         if (textNote.indexOf(contentSearch) == -1) {
             item.style.display = 'none';
-            alert('Not find it')
         } else {
             item.style.display = 'flex';
         }
@@ -97,14 +71,83 @@ searchBar.addEventListener('keyup', function(e) {
 });
 
 
-//removing note with confirmation
+
+
+// save in local storage
+let setToLocalS = (newElem) => {
+    if (localStorage.getItem('Local') === null) {
+        arrayInLocal = [];
+    } else {
+        arrayInLocal = JSON.parse(localStorage.getItem('Local'));
+    }
+    arrayInLocal.push(newElem);
+    localStorage.setItem('Local', JSON.stringify(arrayInLocal));
+};
+
+function saveSearch(value) {
+    localStorage.setItem('search', value)
+};
+
+
+
+//get from local storage
+let getFromLocal = () => {
+    if (localStorage.getItem('Local') === null) {
+        arrayInLocal = [];
+    } else {
+        arrayInLocal = JSON.parse(localStorage.getItem('Local'));
+    }
+    arrayInLocal.forEach((elem) => {
+        addContent();
+        let span = document.querySelector('.textnote');
+        span.textContent = elem;
+    })
+};
+
+
+
+
+//remove item than remove it from a local storage
+
 list.addEventListener('click', function(e) {
-    let itemToRemove = e.target.closest('#check');
-    let message = confirm("Do you want to remove it !!");
-    if (message == true) {
-        itemToRemove.parentNode.remove();
-        list.style.cssText += 'padding-bottom:0px';
-        localStorage.removeItem('textInput');
+    if (e.target.id === 'Date.now()') {
+        let message = confirm("Do you want to remove it !!");
+        if (message == true) {
+            e.target.checked = true;
+            e.target.parentElement.remove()
+
+        }
+        e.target.checked = false;
+
+        arrayInLocal = JSON.parse(localStorage.getItem('Local'));
+        let index = arrayInLocal.indexOf(e.target.parentElement);
+        arrayInLocal.splice(index, 1);
+        localStorage.setItem('Local', JSON.stringify(arrayInLocal));
 
     }
 });
+
+
+
+
+document.addEventListener('DOMContentLoaded', getFromLocal);
+
+
+/*list.addEventListener('click', function(e) {
+    if (e.target.className === 'textnote') {
+        let message = confirm("Do you want to remove it !!");
+        if (message == true) {
+            let removedElem = e.target;
+
+            arrayInLocal = JSON.parse(localStorage.getItem('Local'));
+            for (let i = 0; i <= arrayInLocal.length; i++) {
+                if (removedElem.innerHTML === arrayInLocal[i]) {
+                    let index = arrayInLocal.indexOf(arrayInLocal[i]);
+                    arrayInLocal.splice(index, 1);
+                    localStorage.setItem('Local', JSON.stringify(arrayInLocal));
+                    removedElem.parentNode.remove()
+                }
+            }
+        }
+    }
+});*/
