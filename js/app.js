@@ -28,7 +28,7 @@ function addContent() {
     let newItem = document.createElement('li');
     newItem.className = 'cart';
 
-    newItem.innerHTML = '<input id="Date.now()" type="radio">';
+    newItem.innerHTML = '<input id="check" type="radio">';
     let textNote = document.createElement('span');
     textNote.className = 'textnote';
     textNote.id = Date.now();
@@ -110,20 +110,17 @@ let getFromLocal = () => {
 //remove item than remove it from a local storage
 
 list.addEventListener('click', function(e) {
-    if (e.target.id === 'Date.now()') {
+    if (e.target.id === 'check') {
         let message = confirm("Do you want to remove it !!");
         if (message == true) {
-            e.target.checked = true;
-            e.target.parentElement.remove()
+            e.target.parentElement.remove();
+            arrayInLocal = JSON.parse(localStorage.getItem('Local'));
+            let index = arrayInLocal.indexOf(e.target.parentElement);
+            arrayInLocal.splice(index, 1);
+            localStorage.setItem('Local', JSON.stringify(arrayInLocal));
 
         }
         e.target.checked = false;
-
-        arrayInLocal = JSON.parse(localStorage.getItem('Local'));
-        let index = arrayInLocal.indexOf(e.target.parentElement);
-        arrayInLocal.splice(index, 1);
-        localStorage.setItem('Local', JSON.stringify(arrayInLocal));
-
     }
 });
 
