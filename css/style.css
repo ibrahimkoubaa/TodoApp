@@ -21,6 +21,15 @@ main {
     padding: 52px 199px 99px 70px;
 }
 
+@media screen and (max-width: 375px) {
+    main {
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        padding: 10px;
+    }
+}
+
 .right-side {
     margin-top: 38px;
     flex: 1;
