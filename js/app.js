@@ -18,16 +18,9 @@ var yyyy = today.getFullYear();
 today = dd + 'th ' + mm + ', ' + yyyy;
 dateUpdated.innerHTML = today;
 
-// function to indisplay submitting button
-noteInput.onclick = function() {
-    btnSubmit.disabled = false;
-    btnSubmit.style.cssText = 'cursor: pointer;color: #7556CD;background: linear-gradient( 180deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.276) 100%);'
-};
-
 function addContent() {
     let newItem = document.createElement('li');
     newItem.className = 'cart';
-
     newItem.innerHTML = '<input id="check" type="radio">';
     let textNote = document.createElement('span');
     textNote.className = 'textnote';
@@ -39,11 +32,34 @@ function addContent() {
     btnSubmit.style.cssText = 'none';
 };
 
+// function for adding a new item by enter key clicking
+noteInput.onkeyup = function(e) {
+    btnSubmit.disabled = false;
+    btnSubmit.style.cssText = 'cursor: pointer;color: #7556CD;background: linear-gradient( 180deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.276) 100%);'
+    if (e.keyCode === 13) {
 
-
-// function for adding a new item
-btnSubmit.addEventListener("click", function(e) {
+        if (noteInput.value.trim() !== "") {
+            addContent()
+            let span = document.querySelector('.textnote');
+            span.textContent = e.target.value;
+            setToLocalS(e.target.value);
+        }
+        btnSubmit.disabled = true;
+        btnSubmit.style.cssText = 'none'
+        e.target.value = "";
+    }
+};
+// function to display submitting button
+noteInput.onclick = function() {
     if (noteInput.value !== "") {
+        btnSubmit.disabled = false;
+        btnSubmit.style.cssText = 'cursor: pointer;color: #7556CD;background: linear-gradient( 180deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.276) 100%);'
+    }
+};
+
+// function for adding a new item by mousse clicking
+btnSubmit.addEventListener('click', function() {
+    if (noteInput.value.trim() !== "") {
         addContent()
         let span = document.querySelector('.textnote');
         span.textContent = noteInput.value;
@@ -51,6 +67,8 @@ btnSubmit.addEventListener("click", function(e) {
     }
     noteInput.value = "";
 });
+
+
 
 
 
@@ -76,7 +94,7 @@ searchBar.addEventListener('keyup', function(e) {
 // save in local storage
 let setToLocalS = (newElem) => {
     if (localStorage.getItem('Local') === null) {
-        arrayInLocal = [];
+        var arrayInLocal = [];
     } else {
         arrayInLocal = JSON.parse(localStorage.getItem('Local'));
     }
@@ -118,7 +136,6 @@ list.addEventListener('click', function(e) {
             let index = arrayInLocal.indexOf(e.target.parentElement);
             arrayInLocal.splice(index, 1);
             localStorage.setItem('Local', JSON.stringify(arrayInLocal));
-
         }
         e.target.checked = false;
     }
